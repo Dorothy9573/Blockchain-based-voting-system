@@ -1,0 +1,24 @@
+{
+  "name": "blockchain-voting",
+  "version": "1.0.0",
+  "main": "truffle-config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@truffle/hdwallet-provider": "^2.1.15",
+    "@walletconnect/web3-provider": "^1.8.0",
+    "@web3modal/ethereum": "^2.7.1",
+    "@web3modal/react": "^2.7.1",
+    "dotenv": "^17.2.1",
+    "ethers": "^5.7.0",
+    "truffle": "^5.11.5",
+    "viem": "^2.33.0",
+    "wagmi": "^2.16.0",
+    "web3modal": "^1.9.12"
+  }
+}
