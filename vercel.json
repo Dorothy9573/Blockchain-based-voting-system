@@ -1,12 +1,15 @@
 {
+  "installCommand": "npm install --prefix client && npm install",
+  "buildCommand": "npm run build --prefix client",
+  "outputDirectory": "client/build",
   "rewrites": [
     {
       "source": "/static/(.*)",
-      "destination": "/client/build/static/$1"
+      "destination": "/static/$1"
     },
     {
       "source": "/(.*)",
-      "destination": "/client/build/index.html"
+      "destination": "/index.html"
     }
   ]
 }
