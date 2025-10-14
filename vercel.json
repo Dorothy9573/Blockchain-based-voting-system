@@ -5,14 +5,23 @@
       "src": "client/package.json",
       "use": "@vercel/static-build",
       "config": {
+        "distDir": "build",
         "rootDirectory": "client"
       }
+    },
+    {
+      "src": "app.js",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "/.*",
-      "dest": "/index.html"
+      "src": "/api/(.*)",
+      "dest": "app.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "client/build/$1"
     }
   ]
 }
