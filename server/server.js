@@ -1,15 +1,10 @@
 // server.js
 import express from "express";
 import cors from "cors";
-import path from "path";
-import { fileURLToPath } from "url";
 import Web3 from "web3";
 import dotenv from "dotenv";
 
 dotenv.config();
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const app = express();
 app.use(cors());
@@ -104,13 +99,6 @@ app.post("/api/vote", async (req, res) => {
       error: error.message,
     });
   }
-});
-
-// Serve frontend build
-app.use(express.static(path.join(__dirname, "../client/build")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
 
 // Start Server

@@ -1,118 +1,130 @@
-# Blockchain-based-voting-system
-This project is a decentralized, secure, and transparent e-voting system built on blockchain technology. It aims to address the common challenges of traditional voting, such as a lack of transparency, vulnerability to fraud, and inefficient vote tallying.
+📌 Blockchain-Based Voting System
 
-Features
-For Voters:
-Secure Authentication: Log in with a cryptocurrency wallet (e.g., MetaMask).
+A decentralized and secure electronic voting platform built using Blockchain Technology to ensure transparency, prevent vote manipulation, and allow voters to confirm their votes independently.
 
-Anonymous Voting: Cast your vote securely and anonymously.
+This project leverages Ethereum Blockchain and Web3 to provide trustless and tamper-proof election results.
 
-Vote Verification: Independently verify that your vote has been recorded on the blockchain.
+✅ Features
+For Administrators
 
-Live Results: View real-time, tamper-proof election results.
+Open & close elections
 
-For Administrators:
-Election Management: Create and configure new elections.
+Add candidates
 
-Voter Authorization: Authorize eligible voters to participate.
+Authorize voters
 
-Real-time Tallies: Monitor vote counts as they are submitted to the blockchain.
+Monitor real-time vote counts
 
-Technical Stack
-The system is built on a hybrid architecture, combining off-chain data management with on-chain security.
+For Voters
 
-Client Layer: React.js
+Connect wallet using MetaMask
 
-Application Layer: Node.js with Express.js
+Cast votes anonymously
 
-Smart Contract: voting.sol, deployed on the Sepolia Ethereum Testnet
+Verify votes on the blockchain
 
-Off-Chain Database: For managing sensitive user data and election metadata.
+View real-time results securely
 
-Getting Started
-Prerequisites
-Node.js (v14 or higher)
+Tech Stack
+Layer	Technology
+Frontend	React.js (Web3 UI)
+Backend	Node.js + Express.js
+Blockchain	Solidity Smart Contract (Sepolia Testnet via Alchemy)
+Web3	MetaMask + web3.js
+Hosting	Frontend → Vercel
+Backend → Render
+Smart Contract
 
-npm or yarn
+File: VotingSystem.sol
 
-A web browser with a crypto wallet extension (e.g., MetaMask) configured for the Sepolia Testnet.
+Network: Sepolia Ethereum Testnet
 
-Installation
-Clone the repository:
+Purpose:
 
-git clone [https://github.com/Dorothy9573/Blockchain-based-voting-system.git](https://github.com/Dorothy9573/Blockchain-based-voting-system.git)
+Store candidates
+
+Allow authorized voting
+
+Tally votes immutably
+
+🚀 Deployment
+
+✅ Frontend deployed on Vercel
+✅ Backend deployed on Render
+
+The backend exposes API endpoints:
+
+https://blockchain-based-voting-system-va5h.onrender.com
+
+
+The frontend dynamically communicates with the deployed backend —
+so no local server is required ✅
+
+🧩 Local Development (Optional)
+🔹 Prerequisites
+
+Node.js (v16+ recommended)
+
+MetaMask installed in browser
+
+Sepolia Testnet wallet configured
+
+🔹 Clone the repository
+git clone https://github.com/Dorothy9573/Blockchain-based-voting-system.git
 cd Blockchain-based-voting-system
 
-
-Install dependencies:
-
+🔹 Install dependencies
+Server
+cd server
 npm install
 
+Client
+cd ../client
+npm install
 
-Running the Application
-Start the Node.js server:
-
-node app.js
-
-
-Start the React application:
-
+🔹 Run locally
+Start backend
+cd server
 npm start
 
 
-The application will now be running on http://localhost:3000.
+Server runs on:
+👉 http://localhost:5000
 
-Smart Contract
-The voting.sol smart contract handles all the core voting logic. It is responsible for:
+Start frontend
+cd client
+npm start
 
-Registering voters
 
-Managing candidates
+Frontend runs on:
+👉 http://localhost:3000
 
-Handling vote submissions
+🔐 Environment Variables
 
-Tallying results
+Create a .env file inside /server:
 
-License
+ALCHEMY_API_KEY=your_sepolia_api_key_here
+
+📝 Scripts Overview
+Location	Script	Description
+/client	npm start	Start React frontend
+/server	npm start	Start Node backend
+📄 License
+
 This project is licensed under the MIT License.
 
-Deployment on Vercel
-Due to the project's hybrid architecture (React front-end and Node.js back-end), a special configuration is required for deployment on Vercel. A common 404 error occurs because Vercel only serves the React application and doesn't run the Node.js server.
+Acknowledgment
 
-To solve this, you need to add a vercel.json configuration file to the root of your project. This file will tell Vercel to treat your app.js file as a serverless function that handles all API requests.
+Built using:
 
-Create a vercel.json file at the root of your project directory.
+Ethereum Blockchain
 
-Add the following content to the file:
+Alchemy RPC
 
-{
-  "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build"
-    },
-    {
-      "src": "app.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "app.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/"
-    }
-  ]
-}
+Web3 & MetaMask
 
-Commit and push this new file to your GitHub repository.
+React + Node.js stack
 
-Redeploy your project on Vercel.
+🎯 Project Goal
 
-Thank You!
-
-This configuration tells Vercel to use the @vercel/static-build builder for your React app and the @vercel/node builder for your app.js file. The routes section then ensures that all requests to /api/* are directed to your Node.js serverless function, while all other requests are routed to your React app.
+To enforce trust, privacy, and transparency in digital voting systems using modern decentralized technologies.
