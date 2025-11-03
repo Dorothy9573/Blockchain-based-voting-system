@@ -1,56 +1,64 @@
-const express = require("express");
-const cors = require("cors");
-const path = require("path");
-const Web3 = require("web3");
+// server.js
+import express from "express";
+import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
+import Web3 from "web3";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 // Connect to Sepolia via Alchemy
-const web3 = new Web3(`https://eth-sepolia.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY || "YOUR_API_KEY_HERE"}`);
+const web3 = new Web3(
+  `https://eth-sepolia.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY || "YOUR_API_KEY_HERE"}`
+);
+
 const contractAddress = "0x8E7AB13e7703888FCD0953582BD633e66675F778";
 const contractABI = [
   {
-    "inputs": [],
-    "stateMutability": "nonpayable",
-    "type": "constructor"
+    inputs: [],
+    stateMutability: "nonpayable",
+    type: "constructor",
   },
   {
-    "inputs": [],
-    "name": "admin",
-    "outputs": [{"internalType": "address","name": "","type": "address"}],
-    "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    inputs: [],
+    name: "admin",
+    outputs: [{ internalType: "address", name: "", type: "address" }],
+    stateMutability: "view",
+    type: "function",
   },
   {
-    "inputs": [{"internalType": "uint256","name": "","type": "uint256"}],
-    "name": "candidates",
-    "outputs": [
-      {"internalType": "uint256","name": "id","type": "uint256"},
-      {"internalType": "string","name": "name","type": "string"},
-      {"internalType": "uint256","name": "voteCount","type": "uint256"}
+    inputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    name: "candidates",
+    outputs: [
+      { internalType: "uint256", name: "id", type: "uint256" },
+      { internalType: "string", name: "name", type: "string" },
+      { internalType: "uint256", name: "voteCount", type: "uint256" },
     ],
-    "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    stateMutability: "view",
+    type: "function",
   },
   {
-    "inputs": [],
-    "name": "candidatesCount",
-    "outputs": [{"internalType": "uint256","name": "","type": "uint256"}],
-    "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    inputs: [],
+    name: "candidatesCount",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    stateMutability: "view",
+    type: "function",
   },
   {
-    "inputs": [{"internalType": "uint256","name": "_candidateId","type": "uint256"}],
-    "name": "vote",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  }
+    inputs: [{ internalType: "uint256", name: "_candidateId", type: "uint256" }],
+    name: "vote",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
 ];
 
 const votingContract = new web3.eth.Contract(contractABI, contractAddress);
@@ -66,7 +74,7 @@ app.get("/api/candidates", async (req, res) => {
       candidates.push({
         id: c.id,
         name: c.name,
-        votes: c.voteCount
+        votes: c.voteCount,
       });
     }
 
@@ -83,17 +91,17 @@ app.post("/api/vote", async (req, res) => {
 
     const tx = await votingContract.methods.vote(candidateId).send({
       from: voterAddress,
-      gas: 300000
+      gas: 300000,
     });
 
     res.json({
       success: true,
-      transactionHash: tx.transactionHash
+      transactionHash: tx.transactionHash,
     });
   } catch (error) {
     res.status(400).json({
       success: false,
-      error: error.message
+      error: error.message,
     });
   }
 });
@@ -106,7 +114,8 @@ app.get("*", (req, res) => {
 });
 
 // Start Server
-app.listen(5000, () => {
-  console.log("Backend running on port 5000");
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Backend running on port ${PORT}`);
   console.log("Connected to Sepolia Contract");
 });
